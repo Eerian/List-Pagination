@@ -3,21 +3,18 @@ Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
 
-// Add variables that store DOM elements you will need to reference and/or manipulate
 //Select all students by class name.
 const students = document.getElementsByClassName('student-item');
 
 
 // Create a function to hide all of the items in the list excpet for the ten you want to show
-// Tip: Keep in mind that with a list of 54 studetns, the last page will only display four
-
 const showPage = (list, page) => {
         // loop over items in the list parameter
         for (let i = 0; i < list.length; i++) {
             // if the index of a list item is >= the index of the first item that should be shown on
             //the page, && the list item index is <= the index of the last item that should be shown on
             //the page, show it. Else hide them.
-            if (i >= page * 10 && i <= ((page * 10) + (9))) {
+            if (i >= page * 10 && i <= ((page * 10) + (9))) { // starts at index 0 - 9
                 list[i].style.display = 'block';
             } else {
                 list[i].style.display = 'none';
@@ -27,11 +24,10 @@ const showPage = (list, page) => {
     //when page first loads, start at page 1 which has an index 0 from the allLinks loop at the bottom.
 showPage(students, 0);
 
-// Create and append the pagination links
+
+// Creates and appends the pagination links
 // Add functionality to the pagination buttons so that they show and hide the correct items
 const appendPageLinks = (list) => {
-    // if pagination already exists, remove it
-
     //calculate amout of pages needed: Devide total list number by amout you want to show on page;
     let pages = Math.ceil(list.length / 10);
 
@@ -47,8 +43,7 @@ const appendPageLinks = (list) => {
 
     // for every page
     // add li and a tags with the page number text
-    // add an event listener to each a tag, or add an event listener to the pagination div,
-    //and use event delegation to target the a tags to define what happens they are clicked
+    // add an event listener to each a tag to define what happens they are clicked
     let listNumbers = 1; //keep track of numbers on the links starting at 1.
 
     for (let i = 0; i < pages; i++) {
@@ -65,6 +60,7 @@ const appendPageLinks = (list) => {
     //select all links
     let allLinks = document.querySelectorAll('a');
     //loop through links and add eventlistener to all
+    //get 'page' index for the showPage function
     for (let i = 0; i < allLinks.length; i++) {
         allLinks[i].addEventListener('click', (event) => {
             //call showPage function to display appropriate number of list items
@@ -77,7 +73,5 @@ const appendPageLinks = (list) => {
             event.target.className = 'active';
         });
     }
-
 }
-
 appendPageLinks(students);
